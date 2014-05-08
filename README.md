@@ -15,10 +15,10 @@ import pygelf
 gelf_server = 'graylog2.local'
 
 # Using mandatory arguments
-gelf = pygelf.Client(gelf_server)
+gelf = pygelf.UdpClient(gelf_server)
 
 # Using all arguments
-gelf = pygelf.Client(gelf_server, port=12202, mtu=8000, source='macbook.local')
+gelf = pygelf.UdpClient(gelf_server, port=12202, mtu=8000, source='macbook.local')
 
 # Bare minimum is to send a string, which will map to gelf['short_message']
 gelf.log('server is DOWN')

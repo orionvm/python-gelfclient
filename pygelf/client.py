@@ -5,7 +5,7 @@ import math
 import struct 
 from datetime import datetime
 
-class Client():
+class UdpClient():
 
     UDPSock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 

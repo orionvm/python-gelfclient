@@ -5,7 +5,7 @@ import time
 import string
 import random
 import unittest
-from pygelf import Client as GelfUdp
+from pygelf import UdpClient as GelfUdp
 
 HOST = os.environ.get('GELF_TEST_HOST', 'localhost')
 PORT = int(os.environ.get('GELF_TEST_PORT', '12201'))
