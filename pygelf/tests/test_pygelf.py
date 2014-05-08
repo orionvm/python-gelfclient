@@ -65,6 +65,8 @@ class TestPygelf(unittest.TestCase):
         data = random_string(gelf.mtu * 5)
         jsn = gelf.log(sys._getframe().f_code.co_name, data=data)
 
+def main():
+    unittest.main()
 
 if __name__ == '__main__':
-    unittest_main()
+    main()
