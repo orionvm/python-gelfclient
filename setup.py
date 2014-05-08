@@ -25,4 +25,5 @@ setup(
         "Topic :: Utilities",
         "Topic :: System :: Logging"
     ],
+     test_suite='pygelf.tests',
 )
