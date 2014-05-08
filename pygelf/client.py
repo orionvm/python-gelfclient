@@ -3,7 +3,7 @@ import zlib
 import json
 import math
 import struct 
-import time
+from datetime import datetime
 
 class Client():
 
@@ -23,11 +23,11 @@ class Client():
         totalChunks = int(math.ceil(len(data) / float(chunk_size)))
         assert(totalChunks <= 128)
         count = 0
-        messageId = hash(str(time.time()) + self.source)
+        messageId = hash(str(datetime.now().microsecond) + self.source)
         for i in xrange(0, len(data), chunk_size):
             header = struct.pack("!ccqBB", '\x1e', '\x0f', messageId, count, totalChunks)
-            yield header + data[i:i+chunk_size]
             count += 1
+            yield header + data[i:i+chunk_size]
 
     def log(self, _fields_dict = {}, **fields_named):
         if isinstance(_fields_dict, basestring):
@@ -48,9 +48,10 @@ class Client():
         #print message		
         message_str = json.dumps(message).encode('utf-8')
         output = zlib.compress(message_str)
-    
         if len(output) > self.mtu:
             for chunk in self.chunks(output):
                 self.UDPSock.sendto(chunk, (self.server, self.port))
         else:
             self.UDPSock.sendto(output, (self.server, self.port))
+            
+        return message
