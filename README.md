@@ -1,7 +1,11 @@
 pygelf
 ======
 
-Python client for sending UDP messages in Graylog Extended Log Format (GELF)
+Python client for sending UDP messages in Graylog Extended Log Format (GELF).
+
+Messages are zlib compressed, and support the GELF chunked encoding.
+
+Since messages are sent with UDP, the log method should return quickly and not raise an exception due to timeout. However an exception may be raised due to a DNS name resolution problem.
 
 Usage
 ======
