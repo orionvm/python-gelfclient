@@ -3,9 +3,15 @@ gelfclient
 
 Python client for sending UDP messages in Graylog Extended Log Format (GELF).
 
-Messages are zlib compressed, and support the GELF chunked encoding.
+Messages are zlib compressed, and support GELF chunked encoding.
 
-Since messages are sent with UDP, the log method should return quickly and not raise an exception due to timeout. However an exception may be raised due to a DNS name resolution problem.
+Since messages are sent with UDP, the log method should return quickly and not raise an exception due to timeout. However an exception may be raised due to a DNS name resolution failure for the target hostname.
+
+
+Installation
+======
+pip install gelfclient
+
 
 Usage
 ======
