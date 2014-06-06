@@ -5,7 +5,7 @@ import time
 import string
 import random
 import unittest
-from pygelf import UdpClient as GelfUdp
+from gelfclient import UdpClient as GelfUdp
 
 HOST = os.environ.get('GELF_TEST_HOST', 'localhost')
 PORT = int(os.environ.get('GELF_TEST_PORT', '12201'))
@@ -16,7 +16,7 @@ def random_string(length):
     return ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(int(length)))
 
 
-class TestPygelf(unittest.TestCase):
+class TestUdp(unittest.TestCase):
     def test_init(self):
         gelf = GelfUdp(HOST, PORT)
         self.assertEquals(gelf.server, HOST)

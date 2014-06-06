@@ -1,4 +1,4 @@
-pygelf
+gelfclient
 ======
 
 Python client for sending UDP messages in Graylog Extended Log Format (GELF).
@@ -10,15 +10,15 @@ Since messages are sent with UDP, the log method should return quickly and not r
 Usage
 ======
 ```
-import pygelf
+from gelfclient import UdpClient
 
-gelf_server = 'graylog2.local'
+gelf_server = 'localhost'
 
 # Using mandatory arguments
-gelf = pygelf.UdpClient(gelf_server)
+gelf = UdpClient(gelf_server)
 
 # Using all arguments
-gelf = pygelf.UdpClient(gelf_server, port=12202, mtu=8000, source='macbook.local')
+gelf = UdpClient(gelf_server, port=12202, mtu=8000, source='macbook.local')
 
 # Bare minimum is to send a string, which will map to gelf['short_message']
 gelf.log('server is DOWN')
