@@ -5,6 +5,12 @@ import math
 import struct 
 from datetime import datetime
 
+class LogLevel(IntEnum):
+    alert = 1
+    warning = 2
+    error = 3
+
+
 class UdpClient():
 
     UDPSock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -44,6 +50,9 @@ class UdpClient():
                 message['host'] = message['source']
             else:
                 message['host'] = self.source
+        if 'level' not in message:
+            message['level'] = LogLevel.alert
+                
 
         #print message		
         message_str = json.dumps(message).encode('utf-8')
