@@ -45,7 +45,7 @@ class UdpClient():
             else:
                 message['host'] = self.source
         if 'level' not in message:
-            message['level'] = 1
+            message['level'] = 1 # alert
                 
 
         #print message		
