@@ -34,9 +34,7 @@ class UdpClient():
             _fields_dict = { 'short_message': _fields_dict }
 
         message = dict(_fields_dict.items() + fields_named.items())
-    
-        if 'version' not in message:
-            message['version'] = '1.1'
+        message['version'] = '1.1'
         if 'short_message' not in message:
             message['short_message'] = 'null'
         if 'host' not in message:
