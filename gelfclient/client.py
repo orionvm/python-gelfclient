@@ -44,6 +44,9 @@ class UdpClient():
                 message['host'] = message['source']
             else:
                 message['host'] = self.source
+        if 'level' not in message:
+            message['level'] = 1 # alert
+                
 
         #print message		
         message_str = json.dumps(message).encode('utf-8')

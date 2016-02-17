@@ -33,15 +33,16 @@ gelf.log('server is DOWN')
 gelf.log('server is DOWN', source='hostchecker')
 
 # Send different data fields
-gelf.log('status change', state='DOWN', server='macbook', source='hostchecker')
+gelf.log('status change', state='DOWN', server='macbook', source='hostchecker', level=3)
 
 
 # You can also prepare all data into a dictionary and give that to .log
 data = {}
-data['short_message'] = 'hello from python'
+data['short_message'] = 'warning from python'
 data['host'] = 'hostchecker'
+data['level'] = 2   # alternatively pass in the log levels from syslog
 gelf.log(data)
 ```
 
 See the GELF specification for other fields and their meaning: 
-http://graylog2.org/gelf#specs
+http://docs.graylog.org/en/latest/pages/gelf.html#gelf-format-specification
