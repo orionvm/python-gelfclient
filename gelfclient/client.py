@@ -2,7 +2,7 @@ import socket
 import zlib
 import json
 import math
-import struct 
+import struct
 from datetime import datetime
 
 class UdpClient():
@@ -48,7 +48,6 @@ class UdpClient():
             message['level'] = 1 # alert
                 
 
-        #print message		
         message_str = json.dumps(message).encode('utf-8')
         output = zlib.compress(message_str)
         if len(output) > self.mtu:
@@ -56,5 +55,5 @@ class UdpClient():
                 self.UDPSock.sendto(chunk, (self.server, self.port))
         else:
             self.UDPSock.sendto(output, (self.server, self.port))
-            
+
         return message
