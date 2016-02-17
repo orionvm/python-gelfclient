@@ -65,6 +65,28 @@ class TestUdp(unittest.TestCase):
         data = random_string(gelf.mtu * 5)
         jsn = gelf.log(sys._getframe().f_code.co_name, data=data)
 
+    def test_default_log_level(self):
+        gelf = GelfUdp(HOST, PORT)
+        jsn = gelf.log(sys._getframe().f_code.co_name)
+        self.assertEquals(jsn['level'], 1)
+
+    def test_different_log_level(self):
+        gelf = GelfUdp(HOST, PORT)
+        for level in [0, 4, '0', '3', '7']:
+            jsn = gelf.log(sys._getframe().f_code.co_name, level=level)
+            self.assertEquals(jsn['level'], int(level))
+
+    def test_out_of_range_level(self):
+        gelf = GelfUdp(HOST, PORT)
+        for level in [-1, 8]:
+            with self.assertRaises(AssertionError):
+                jsn = gelf.log(sys._getframe().f_code.co_name, level=level)
+
+    def test_wrong_type_for_level(self):
+        gelf = GelfUdp(HOST, PORT)
+        with self.assertRaises(ValueError):
+            jsn = gelf.log(sys._getframe().f_code.co_name, level='not a number!')
+
 def main():
     unittest.main()
 

@@ -42,9 +42,9 @@ class UdpClient():
                 message['host'] = message['source']
             else:
                 message['host'] = self.source
-        if 'level' not in message:
-            message['level'] = 1 # alert
-                
+        level = int(message.get('level', 1)) # Default severity / level is alert (1)
+        assert(0 <= level <= 7)
+        message['level'] = level
 
         message_str = json.dumps(message).encode('utf-8')
         output = zlib.compress(message_str)
