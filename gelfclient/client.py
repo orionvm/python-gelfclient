@@ -5,12 +5,14 @@ import math
 import struct
 from datetime import datetime
 
+from six import string_types
+
 class UdpClient():
 
     UDPSock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
     def __init__(self, server, port=12201, mtu=1450, source=None):
-        assert isinstance(server, basestring)
+        assert isinstance(server, string_types)
         assert mtu > 12
 
         self.server = server
@@ -30,10 +32,11 @@ class UdpClient():
             yield header + data[i:i+chunk_size]
 
     def log(self, _fields_dict = {}, **fields_named):
-        if isinstance(_fields_dict, basestring):
+        if isinstance(_fields_dict, string_types):
             _fields_dict = { 'short_message': _fields_dict }
 
-        message = dict(_fields_dict.items() + fields_named.items())
+        message = _fields_dict
+        message.update( fields_named)
         message['version'] = '1.1'
         if 'short_message' not in message:
             message['short_message'] = 'null'
