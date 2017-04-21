@@ -3,9 +3,14 @@ import zlib
 import json
 import math
 import struct
+import sys
 from datetime import datetime
 
 from six import string_types
+import copy
+
+if sys.version_info.major > 2:
+    xrange = range
 
 class UdpClient():
 
@@ -27,7 +32,7 @@ class UdpClient():
         count = 0
         messageId = hash(str(datetime.now().microsecond) + self.source)
         for i in xrange(0, len(data), chunk_size):
-            header = struct.pack("!ccqBB", '\x1e', '\x0f', messageId, count, totalChunks)
+            header = struct.pack("!ccqBB", b'\x1e', b'\x0f', messageId, count, totalChunks)
             count += 1
             yield header + data[i:i+chunk_size]
 
@@ -35,7 +40,7 @@ class UdpClient():
         if isinstance(_fields_dict, string_types):
             _fields_dict = { 'short_message': _fields_dict }
 
-        message = _fields_dict
+        message = copy.deepcopy( _fields_dict)
         message.update( fields_named)
         message['version'] = '1.1'
         if 'short_message' not in message:

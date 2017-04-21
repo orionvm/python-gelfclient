@@ -1,2 +1,2 @@
-__version__ = '0.0.5'
-from client import UdpClient
+__version__ = '0.0.6'
+from .client import UdpClient
