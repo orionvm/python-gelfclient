@@ -5,8 +5,9 @@ import time
 import string
 import random
 import unittest
-from six import string_types
 from gelfclient import UdpClient as GelfUdp
+
+string_types = str if sys.version_info[0] == 3 else basestring
 
 HOST = os.environ.get('GELF_TEST_HOST', 'localhost')
 PORT = int(os.environ.get('GELF_TEST_PORT', '12201'))

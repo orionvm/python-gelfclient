@@ -4,13 +4,11 @@ import json
 import math
 import struct
 import sys
+import copy
 from datetime import datetime
 
-from six import string_types
-import copy
-
-if sys.version_info.major > 2:
-    xrange = range
+string_types = str   if sys.version_info.major == 3 else basestring
+xrange       = range if sys.version_info.major == 3 else xrange
 
 class UdpClient():
 
