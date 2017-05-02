@@ -25,5 +25,11 @@ setup(
         "Topic :: Utilities",
         "Topic :: System :: Logging"
     ],
+    setup_requires= [
+        'six>=1.10'
+    ],
+    install_requires=[
+        'six>=1.10',
+    ],
      test_suite='gelfclient.tests',
 )
